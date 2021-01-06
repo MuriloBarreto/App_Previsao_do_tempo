@@ -23,6 +23,7 @@ class Componentes{
   static caixaDeTexto(String rotulo, String dica, TextEditingController controlador, validacao,{bool obscure=false, bool numero=false}){
     return Container(
       padding: EdgeInsets.only(top: 10),
+
       child: TextFormField(
         controller: controlador,
         obscureText: obscure,
@@ -30,9 +31,18 @@ class Componentes{
         keyboardType: numero?TextInputType.number:TextInputType.text,
         decoration: InputDecoration(
           labelText: rotulo,
-          labelStyle: TextStyle(fontSize: 18),
+          fillColor: Colors.white,
+          labelStyle: TextStyle(fontSize: 25, color: Colors.white),
           hintText: dica,
-          hintStyle: TextStyle(fontSize: 10, color: Colors.red),
+          hintStyle: TextStyle(fontSize: 11, color: Colors.yellow),
+          focusedBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white, width: 2.0),
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          enabledBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white, width: 2.0),
+            borderRadius: BorderRadius.circular(25.0),
+          ),
         ),
       ),
     );

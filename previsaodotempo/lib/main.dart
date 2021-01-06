@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController controladorCity = TextEditingController();
   GlobalKey<FormState> cForm = GlobalKey<FormState>();
   String temperatura = "-";
   String datadia = "-";
@@ -26,10 +27,17 @@ class _MyAppState extends State<MyApp> {
   String periodo = "-";
   String cidade = "-";
 
+  Function validaCity = ((value){
+    if(value.isEmpty)
+      return "Informe a cidade";
+
+    return null;
+  });
+
   botaoclicar() async{
     if(!cForm.currentState.validate())
       return;
-    String url = "https://api.hgbrasil.com/weather";
+    String url = "https://api.hgbrasil.com/weather?key=41c93c78&city_name=${controladorCity.text}";
     Response resposta = await get(url);
     Map Tempo = json.decode(resposta.body);
     setState(() {
@@ -59,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.blueAccent,
       body: SingleChildScrollView(
         child: Form(
           key: cForm,
@@ -84,32 +92,41 @@ class _MyAppState extends State<MyApp> {
 
               ),
 
-              Container(
 
-                alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(top: 10,right: 15),
+        Container(
+          padding: EdgeInsets.only(bottom: 29,top: 15,left: 5),
 
-
-                height: 70,
-
-                child: IconButton(
-                  onPressed: botaoclicar,
-                  icon: FaIcon(FontAwesomeIcons.search, color: Colors.white, size: 50,),
+          child: TextFormField(
+            controller: controladorCity,
+            obscureText: false,
+            validator: validaCity,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              labelText: "Cidade",
+              fillColor: Colors.white,
+              labelStyle: TextStyle(fontSize: 25, color: Colors.white),
+              hintText: "Digite o nome da cidade",
+              hintStyle: TextStyle(fontSize: 11, color: Colors.yellow),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
                 ),
-
+                onPressed: botaoclicar,
               ),
-              Container(
-                alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(bottom: 25,top: 5,left: 5),
-                  child: Text(
-                    "Pesquisar",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
+              focusedBorder:OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              enabledBorder:OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+            ),
+          ),
+        ),
+
+
               Componentes.campoDetexto(cidade),
               Componentes.campoDetexto(temperatura),
               Componentes.campoDetexto(descricao),
