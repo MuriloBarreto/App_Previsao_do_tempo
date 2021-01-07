@@ -11,7 +11,7 @@ class Componentes{
 
         rotulo,
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 18,
 

@@ -55,20 +55,32 @@ class _MyAppState extends State<MyApp> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellowAccent,
         centerTitle: true,
-        title: Text('Tempo',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 23,
-
+        title: Text('Tempo'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    Colors.amber,
+                    Colors.yellowAccent
+                  ])
           ),
         ),
 
       ),
-      backgroundColor: Colors.blueAccent,
-      body: SingleChildScrollView(
+      //backgroundColor: Color(0xFFA9E0F0),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Color(0xFF4facfe),
+                  Color(0xFF00f2fe)
+                ])
+        ),
         child: Form(
           key: cForm,
           child: Column(
@@ -76,25 +88,31 @@ class _MyAppState extends State<MyApp> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                color: Colors.amberAccent,
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                Colors.amber,
+                Colors.yellowAccent
+              ]),
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(20.0),
                   ),
                 ),
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 10,bottom: 10),
+                //padding: EdgeInsets.only(top: 5,bottom: 5),
                 child: Image.asset(
                     "assets/imgs/tempo.png",
                   fit: BoxFit.contain,
                 ),
                 width: size.width,
-                height: 250,
+                height: 220,
 
               ),
 
 
         Container(
-          padding: EdgeInsets.only(bottom: 29,top: 15,left: 5),
+          padding: EdgeInsets.only(bottom: 50,top: 20,left: 5),
 
           child: TextFormField(
             controller: controladorCity,
@@ -103,23 +121,23 @@ class _MyAppState extends State<MyApp> {
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelText: "Cidade",
-              fillColor: Colors.white,
-              labelStyle: TextStyle(fontSize: 25, color: Colors.white),
+              fillColor: Colors.black,
+              labelStyle: TextStyle(fontSize: 25, color: Colors.black),
               hintText: "Digite o nome da cidade",
               hintStyle: TextStyle(fontSize: 11, color: Colors.yellow),
               suffixIcon: IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 onPressed: botaoclicar,
               ),
               focusedBorder:OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                borderSide: const BorderSide(color: Colors.black, width: 2.0),
                 borderRadius: BorderRadius.circular(25.0),
               ),
               enabledBorder:OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                borderSide: const BorderSide(color: Colors.black, width: 2.0),
                 borderRadius: BorderRadius.circular(25.0),
               ),
             ),
