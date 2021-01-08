@@ -18,6 +18,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TabController _tabController;
+
+  static const _KTabPages = <Widget>[
+    Center(child: Icon(Icons.cloud, size: 64.0, color: Colors.teal)),
+  ];
+  static const _KTabs = <Tab>[
+    Tab(icon: Icon(Icons.cloud), text: 'Tab1',),
+  ];
+
+
   TextEditingController controladorCity = TextEditingController();
   GlobalKey<FormState> cForm = GlobalKey<FormState>();
   String temperatura = "-";
@@ -56,7 +66,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Tempo'),
+        title: const Text('Tempo', style: TextStyle(color: Colors.black)),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -70,7 +80,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
       ),
-      //backgroundColor: Color(0xFFA9E0F0),
+      //backgroundColor: Color(0xFF00f2fe),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -81,81 +91,84 @@ class _MyAppState extends State<MyApp> {
                   Color(0xFF00f2fe)
                 ])
         ),
-        child: Form(
-          key: cForm,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[
-                Colors.amber,
-                Colors.yellowAccent
-              ]),
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(20.0),
+        height: 605,
+        child: SingleChildScrollView(
+          child: Form(
+            key: cForm,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Colors.amber,
+                  Colors.yellowAccent
+                ]),
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(20.0),
+                    ),
                   ),
+                  alignment: Alignment.center,
+                  //padding: EdgeInsets.only(top: 5,bottom: 5),
+                  child: Image.asset(
+                      "assets/imgs/tempo.png",
+                    fit: BoxFit.contain,
+                  ),
+                  width: size.width,
+                  height: 220,
+
                 ),
-                alignment: Alignment.center,
-                //padding: EdgeInsets.only(top: 5,bottom: 5),
-                child: Image.asset(
-                    "assets/imgs/tempo.png",
-                  fit: BoxFit.contain,
+
+          Container(
+            padding: EdgeInsets.only(bottom: 50,top: 20,left: 5),
+
+            child: TextFormField(
+              controller: controladorCity,
+              obscureText: false,
+              validator: validaCity,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                labelText: "Cidade",
+                fillColor: Colors.black,
+                labelStyle: TextStyle(fontSize: 25, color: Colors.black),
+                hintText: "Digite o nome da cidade",
+                hintStyle: TextStyle(fontSize: 11, color: Colors.yellow),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  onPressed: botaoclicar,
                 ),
-                width: size.width,
-                height: 220,
-
-              ),
-
-
-        Container(
-          padding: EdgeInsets.only(bottom: 50,top: 20,left: 5),
-
-          child: TextFormField(
-            controller: controladorCity,
-            obscureText: false,
-            validator: validaCity,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              labelText: "Cidade",
-              fillColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 25, color: Colors.black),
-              hintText: "Digite o nome da cidade",
-              hintStyle: TextStyle(fontSize: 11, color: Colors.yellow),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
+                focusedBorder:OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),
                 ),
-                onPressed: botaoclicar,
-              ),
-              focusedBorder:OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                borderRadius: BorderRadius.circular(25.0),
-              ),
-              enabledBorder:OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                borderRadius: BorderRadius.circular(25.0),
+                enabledBorder:OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
               ),
             ),
           ),
-        ),
 
 
-              Componentes.campoDetexto(cidade),
-              Componentes.campoDetexto(temperatura),
-              Componentes.campoDetexto(descricao),
-              Componentes.campoDetexto(datadia),
-              Componentes.campoDetexto(hora),
-              Componentes.campoDetexto(periodo),
+                Componentes.campoDetexto(cidade),
+                Componentes.campoDetexto(temperatura),
+                Componentes.campoDetexto(descricao),
+                Componentes.campoDetexto(datadia),
+                Componentes.campoDetexto(hora),
+                Componentes.campoDetexto(periodo),
 
-            ],
+              ],
+
+            ),
           ),
         ),
-      ),
+    ),
     );
   }
 }
